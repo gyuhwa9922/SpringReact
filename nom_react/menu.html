@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+
+<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+
+function MinutesToHours() {
+
+    const [minutes, setMinutes] = React.useState(0);
+    const [flipped, setFlipped] = React.useState(false);
+
+    const onChange = (e) => {
+      setMinutes(e.target.value);
+    }
+
+    const onClick = () => {
+      setMinutes(0);
+    }
+
+    const onFlip = () => {
+      onClick();
+      setFlipped((current) => !current);
+    }
+
+    return (
+
+      <div >
+        <div>
+          <label htmlFor="minutes">Minutes </label>
+          <input
+            value={flipped ? 60 * minutes : minutes}
+            id="minutes"
+            placeholder="Minutes"
+            type="number"
+            disabled={flipped}
+            onChange={onChange}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="hours">Hours </label>
+          <input value={flipped ? minutes : Math.round(minutes / 60)}
+            id="hours"
+            placeholder="Hours"
+            type="number"
+            disabled={!flipped}
+            onChange={onChange}
+          />
+        </div>
+        <button onClick={onClick}>reset</button>
+        <button onClick={onFlip}>{ flipped ? "turn back " : "invert"}</button>
+      </div>
+    );
+  }
+  
+  function KmtoMiles(){
+    return <k3>KM 2 M </k3>
+  }
+  
+  function App() {
+    const [index, setIndex] = React.useState("xx");
+    const onselect = (e) =>{
+      console.log(e.target.value);
+      setIndex(e.target.value);
+    };
+    console.log('render wait' , index);
+
+    return (
+      <div >
+        <h1>good man lgh </h1>
+        <select value={index} onChange ={onselect}>
+          <option value="xx"> select your unit </option>
+          <option value = "0"> hour</option>
+          <option value = "1"> km</option>
+          </select>
+          {
+            index === "0" ? <MinutesToHours/> : null
+          }
+          {
+            index === "1" ? <KmtoMiles/> : null
+          }
+      </div>
+    );
+  }
+  const root = document.getElementById("root");
+  // render의 의미는 React element를 가지고 HTML로 만들어 배치하겠다는 뜻
+  ReactDOM.render(<App />, root);
+</script>
+
+</html>

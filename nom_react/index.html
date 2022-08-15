@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+  const root = document.getElementById("root");
+  function App() {
+    const[counter, setCounter] = React.useState(0);
+
+    const onClick = () => {
+      //State를 세팅을 하는데에는 2가지 방법이 있다.
+      //1번째는 직접 값을 설정해주는 것
+      // setCounter(counter + 1); 
+      //2번째는 함수를 전해주기 
+      setCounter((current) => current +1);
+    };
+
+    console.log("rendered");
+    console.log(counter);
+
+    return (
+      <div>
+        <h3>click : {counter} </h3>
+        <button onClick={onClick}> click me </button>
+      </div>
+    );
+  }
+  // render의 의미는 React element를 가지고 HTML로 만들어 배치하겠다는 뜻
+  ReactDOM.render(<App />, root);
+</script>
+
+</html>
